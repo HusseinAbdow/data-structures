@@ -37,7 +37,7 @@ public class Main {
 
         }
 
-        // 2. Durum: Yeni düğüm listedeki en büyük sayı ise başa eklenir
+        // 2. Durum: Yeni düğüm listedeki en büyük sayı ise(yani rooteki elemandan daha buyuk ise) başa eklenir
         else if (yeniDugum.data > liste.root.data) {
 
             Node temp = liste.root;
