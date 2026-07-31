@@ -24,8 +24,10 @@ public class Main {
         System.out.println();
 
         // Üretilen 25 sayıyı bağlı listeye sıralı şekilde ekle
+        int adim = 1;
         for (Integer num : set) {
-            insert(liste, num);
+            insert(liste, num, adim);
+            adim++;
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -49,9 +51,9 @@ public class Main {
             System.out.println("\nSayı bulundu: " + temp.data);
             System.out.println("Yeni konumunu seçiniz:");
 
-            System.out.println("1. Başa eklenecek");
-            System.out.println("2. Sona eklenecek");
-            System.out.println("3. İki sayının arasına eklenecek");
+            System.out.println("1. Başa taşı");
+            System.out.println("2. Sona taşı");
+            System.out.println("3. İki sayının arasına taşı");
             System.out.println();
 
             // Kullanıcının seçimini al
@@ -64,7 +66,7 @@ public class Main {
     }
 
 
-    public static void insert(LinkedList liste, int data) {
+    public static void insert(LinkedList liste, int data, int adim) {
 
         // Yeni düğüm oluştur
         Node yeniDugum = new Node(data);
@@ -76,11 +78,7 @@ public class Main {
             liste.root.next = null;
             liste.root.previous = null;
 
-            System.out.println("İlk eleman eklendi: " + data);
-
-            // Güncel bağlı listeyi yazdır
-            print(liste);
-            System.out.println();
+            printAdim(liste, adim);
         }
 
         // 2. Durum: Yeni düğüm en küçük eleman ise listenin başına eklenir
@@ -94,10 +92,7 @@ public class Main {
 
             temp.previous = liste.root;
 
-            System.out.println(data + " başa eklendi.");
-
-            print(liste);
-            System.out.println();
+            printAdim(liste, adim);
         }
 
         // 3 ve 4. Durum: Yeni düğüm sona veya iki düğüm arasına eklenir
@@ -117,10 +112,7 @@ public class Main {
                 yeniDugum.previous = iter;
                 yeniDugum.next = null;
 
-                System.out.println(data + " sona eklendi.");
-
-                print(liste);
-                System.out.println();
+                printAdim(liste, adim);
             }
 
             // 4. Durum: İki düğüm arasına ekleme
@@ -132,10 +124,7 @@ public class Main {
                 iter.next.previous = yeniDugum;
                 iter.next = yeniDugum;
 
-                System.out.println(data + " iki düğüm arasına eklendi.");
-
-                print(liste);
-                System.out.println();
+                printAdim(liste, adim);
             }
         }
     }
@@ -148,13 +137,13 @@ public class Main {
 
             // Sayıyı listenin başına ekle
             case 1:
-                System.out.println(data + " başa eklendi.");
+                System.out.println(data + " başa taşındı.");
                 insertBas(liste, data);
                 break;
 
             // Sayıyı listenin sonuna ekle
             case 2:
-                System.out.println(data + " sona eklendi.");
+                System.out.println(data + " sona taşındı.");
                 insertSon(liste, data);
                 break;
 
@@ -162,7 +151,7 @@ public class Main {
             case 3:
                 Scanner scanner = new Scanner(System.in);
 
-                System.out.println("Sayı iki düğüm arasına eklenecek.");
+                System.out.println("Sayı iki düğüm arasına taşınacak.");
                 System.out.println();
 
                 System.out.print("Mevcut LinkedList: ");
@@ -174,7 +163,7 @@ public class Main {
                 System.out.println("İkinci sayıyı seçiniz:");
                 int sayi2 = scanner.nextInt();
 
-                System.out.println(data + " sayısı " + sayi1 + " ve " + sayi2 + " arasına eklendi.");
+                System.out.println(data + " sayısı " + sayi1 + " ve " + sayi2 + " arasına taşındı.");
 
                 insertOrta(liste, sayi1, sayi2, data);
                 break;
@@ -312,5 +301,11 @@ public class Main {
         // Son düğümü yazdır
         System.out.print(iter.data + " ");
         System.out.println();
+    }
+
+
+    public static void printAdim(LinkedList liste, int adim) {
+        System.out.print(adim + ". adım ");
+        print(liste);
     }
 }
