@@ -51,9 +51,9 @@ public class Main {
             System.out.println("\nSayı bulundu: " + temp.data);
             System.out.println("Yeni konumunu seçiniz:");
 
-            System.out.println("1. Başa eklenecek");
-            System.out.println("2. Sona eklenecek");
-            System.out.println("3. İki sayının arasına eklenecek");
+            System.out.println("1. Başa taşı");
+            System.out.println("2. Sona taşı");
+            System.out.println("3. İki sayının arasına taşı");
             System.out.println();
 
             // Kullanıcının seçimini al
@@ -137,13 +137,13 @@ public class Main {
 
             // Sayıyı listenin başına ekle
             case 1:
-                System.out.println(data + " başa eklendi.");
+                System.out.println(data + " başa taşındı.");
                 insertBas(liste, data);
                 break;
 
             // Sayıyı listenin sonuna ekle
             case 2:
-                System.out.println(data + " sona eklendi.");
+                System.out.println(data + " sona taşındı.");
                 insertSon(liste, data);
                 break;
 
@@ -151,7 +151,7 @@ public class Main {
             case 3:
                 Scanner scanner = new Scanner(System.in);
 
-                System.out.println("Sayı iki düğüm arasına eklenecek.");
+                System.out.println("Sayı iki düğüm arasına taşınacak.");
                 System.out.println();
 
                 System.out.print("Mevcut LinkedList: ");
@@ -163,7 +163,7 @@ public class Main {
                 System.out.println("İkinci sayıyı seçiniz:");
                 int sayi2 = scanner.nextInt();
 
-                System.out.println(data + " sayısı " + sayi1 + " ve " + sayi2 + " arasına eklendi.");
+                System.out.println(data + " sayısı " + sayi1 + " ve " + sayi2 + " arasına taşındı.");
 
                 insertOrta(liste, sayi1, sayi2, data);
                 break;
