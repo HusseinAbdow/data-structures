@@ -30,6 +30,8 @@ public class Main {
             adim++;
         }
 
+        printListeKutusu("Sıralanmış liste", liste);
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Çıkartmak istediğiniz sayıyı yazınız:");
@@ -154,8 +156,10 @@ public class Main {
                 System.out.println("Sayı iki düğüm arasına taşınacak.");
                 System.out.println();
 
-                System.out.print("Mevcut LinkedList: ");
-                print(liste);
+                // Seçilen sayı listeden çıkarılır, böylece mevcut listede görünmez
+                delete(liste, data);
+
+                printListeKutusu("Mevcut LinkedList", liste);
 
                 System.out.println("Birinci sayıyı seçiniz:");
                 int sayi1 = scanner.nextInt();
@@ -188,7 +192,7 @@ public class Main {
         liste.root.next = temp;
         temp.previous = liste.root;
 
-        print(liste);
+        printListeKutusu("Güncel LinkedList", liste);
     }
 
 
@@ -210,14 +214,11 @@ public class Main {
         iter.next = yeniDugum;
         yeniDugum.previous = iter;
 
-        print(liste);
+        printListeKutusu("Güncel LinkedList", liste);
     }
 
 
     public static void insertOrta(LinkedList liste, int sayi1, int sayi2, int data) {
-        // Sayıyı mevcut konumundan sil
-        delete(liste, data);
-
         Node yeniDugum = new Node(data);
 
         // Ekleme yapılacak konumu bul
@@ -234,9 +235,8 @@ public class Main {
         iter.next.previous = yeniDugum;
         iter.next = yeniDugum;
 
-        print(liste);
+        printListeKutusu("Güncel LinkedList", liste);
     }
-
 
     static void delete(LinkedList liste, int eleman) {
 
@@ -307,5 +307,48 @@ public class Main {
     public static void printAdim(LinkedList liste, int adim) {
         System.out.print(adim + ". adım ");
         print(liste);
+    }
+
+
+    public static String parantezliListe(LinkedList liste) {
+
+        Node iter = liste.root;
+        StringBuilder sonuc = new StringBuilder("[");
+
+        while (iter != null) {
+            sonuc.append(iter.data);
+
+            if (iter.next != null) {
+                sonuc.append(" ");
+            }
+
+            iter = iter.next;
+        }
+
+        sonuc.append("]");
+
+        return sonuc.toString();
+    }
+
+
+    public static void printListeKutusu(String baslik, LinkedList liste) {
+
+        String listeYazisi = baslik + ": " + parantezliListe(liste);
+
+        System.out.println();
+        printCizgi(listeYazisi.length());
+        System.out.println(listeYazisi);
+        printCizgi(listeYazisi.length());
+        System.out.println();
+    }
+
+
+    public static void printCizgi(int uzunluk) {
+
+        for (int i = 0; i < uzunluk; i++) {
+            System.out.print("-");
+        }
+
+        System.out.println();
     }
 }
