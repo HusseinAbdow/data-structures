@@ -161,11 +161,29 @@ public class Main {
 
                 printListeKutusu("Mevcut LinkedList", liste);
 
-                System.out.println("Birinci sayıyı seçiniz:");
-                int sayi1 = scanner.nextInt();
+                int sayi1;
+                int sayi2;
 
-                System.out.println("İkinci sayıyı seçiniz:");
-                int sayi2 = scanner.nextInt();
+                while (true) {
+                    System.out.println("Birinci sayıyı seçiniz:");
+                    sayi1 = scanner.nextInt();
+
+                    System.out.println("İkinci sayıyı seçiniz:");
+                    sayi2 = scanner.nextInt();
+
+                    int kucukSayi = Math.min(sayi1, sayi2);
+                    int buyukSayi = Math.max(sayi1, sayi2);
+
+                    if (yanYanaMi(liste, kucukSayi, buyukSayi)) {
+                        sayi1 = kucukSayi;
+                        sayi2 = buyukSayi;
+                        break;
+                    }
+
+                    System.out.println();
+                    System.out.println("|HATA!: Seçilen iki sayı yan yana olmalı. Lütfen tekrar seçiniz.");
+                    System.out.println();
+                }
 
                 System.out.println(data + " sayısı " + sayi1 + " ve " + sayi2 + " arasına taşındı.");
 
@@ -224,7 +242,7 @@ public class Main {
         // Ekleme yapılacak konumu bul
         Node iter = liste.root;
 
-        while (iter.data != sayi1 && iter.next.data != sayi2) {
+        while (iter.next != null && !(iter.data == sayi1 && iter.next.data == sayi2)) {
             iter = iter.next;
         }
 
@@ -307,6 +325,28 @@ public class Main {
     public static void printAdim(LinkedList liste, int adim) {
         System.out.print(adim + ". adım ");
         print(liste);
+    }
+
+
+    public static boolean yanYanaMi(LinkedList liste, int sayi1, int sayi2) {
+
+        Node kucukSayi = null;
+        Node buyukSayi = null;
+        Node iter = liste.root;
+
+        while (iter != null) {
+            if (iter.data == sayi1) {
+                kucukSayi = iter;
+            }
+
+            if (iter.data == sayi2) {
+                buyukSayi = iter;
+            }
+
+            iter = iter.next;
+        }
+
+        return kucukSayi != null && buyukSayi != null && kucukSayi.next == buyukSayi && buyukSayi.previous == kucukSayi;
     }
 
 
